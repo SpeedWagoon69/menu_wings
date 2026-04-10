@@ -1,0 +1,152 @@
+/* --- CSS CONSOLIDADO: ANIMACIÓN SUAVE --- */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    background-color: #0d0d0d;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+}
+
+.menu-background {
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('menu_completo.jpg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: contain;
+}
+
+/* --- Botones Flotantes (FAB) --- */
+.fab-container {
+    position: fixed;
+    bottom: 30px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 100;
+}
+
+.fab {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    font-size: 32px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); /* Entrada suave */
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease backwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fab:nth-child(1) { animation-delay: 0.1s; }
+.fab:nth-child(2) { animation-delay: 0.2s; }
+.fab:nth-child(3) { animation-delay: 0.3s; }
+
+.fab:hover, .fab:active {
+    transform: translateY(-5px) scale(1.08);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.7);
+}
+
+.wa { background-color: #25D366; }
+.fb { background-color: #1877F2; }
+.ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+
+/* --- MODAL SUAVE --- */
+
+@keyframes fadeInOverlay {
+    from { opacity: 0; backdrop-filter: blur(0px); }
+    to { opacity: 1; backdrop-filter: blur(8px); }
+}
+
+@keyframes modalSoftAppear {
+    from { 
+        opacity: 0; 
+        transform: scale(0.95) translateY(10px); /* Movimiento corto y escala natural */
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+    }
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    display: flex;
+    animation: fadeInOverlay 0.4s ease forwards;
+}
+
+.modal-content {
+    background: #1c1c1e; /* Color tipo iOS Dark Mode */
+    width: 85%;
+    max-width: 320px;
+    padding: 30px;
+    border-radius: 30px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.modal-overlay.active .modal-content {
+    /* El cubic-bezier(0.23, 1, 0.32, 1) es la curva de "entrada suave" de Google/Apple */
+    animation: modalSoftAppear 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.modal-icon { font-size: 50px; margin-bottom: 15px; }
+.modal-content h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.modal-content p { font-size: 15px; color: #a1a1a6; margin-bottom: 25px; line-height: 1.4; }
+
+.modal-actions { display: flex; gap: 12px; }
+
+.btn-pri, .btn-sec {
+    flex: 1;
+    padding: 14px;
+    border-radius: 16px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-pri { background: #fff; color: #000; }
+.btn-sec { background: #2c2c2e; color: #fff; }
+
+.btn-pri:active, .btn-sec:active { opacity: 0.7; }
+
+@media (max-width: 480px) {
+    .fab { width: 50px; height: 50px; font-size: 28px; }
+}
